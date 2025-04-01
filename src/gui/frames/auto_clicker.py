@@ -3,7 +3,7 @@ import src.gui.frames.frame as Frame
 
 class AutoClickerFrame(Frame.Frame):
     def __init__(self, parent, controller):
-        super().__init__(parent, "auto_clicker", 400 ,400)
+        super().__init__(parent, "auto_clicker", 120, 120)
         
         label = ctk.CTkLabel(self, text="Pantalla de Configuración")
         label.pack(pady=20)

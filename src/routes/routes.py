@@ -14,14 +14,6 @@ class Routes(ctk.CTk):
 
         self.current_frame = self.frames[0]
         self.current_frame.show()
-        
-        # self.title("Aplicación Modular con CustomTkinter")
-        # self.geometry("1200x1200")
-        
-        # self.dashboard = DashboardFrame(self, self)
-        # self.auto_clicker = AutoClickerFrame(self, self)
-
-        # self.dashboard.pack(fill="both", expand=True)
 
     def push(self, frame_id):
         next_frame = next((f for f in self.frames if f.id == frame_id), None)
