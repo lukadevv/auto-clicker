@@ -6,23 +6,27 @@ from src.gui.frames.auto_clicker import AutoClickerFrame
 class Routes(ctk.CTk):
     def __init__(self):
         super().__init__()
+
+        self.frames = [
+            DashboardFrame(self, self),
+            AutoClickerFrame(self, self)
+        ]
+
+        self.current_frame = self.frames[0]
+        self.current_frame.show()
         
-        self.title("Aplicación Modular con CustomTkinter")
-        self.geometry("500x400")
+        # self.title("Aplicación Modular con CustomTkinter")
+        # self.geometry("1200x1200")
         
-        # Crear los frames
-        self.main_frame = DashboardFrame(self, self)
-        self.settings_frame = AutoClickerFrame(self, self)
+        # self.dashboard = DashboardFrame(self, self)
+        # self.auto_clicker = AutoClickerFrame(self, self)
 
-        # Mostrar la pantalla principal por defecto
-        self.main_frame.pack(fill="both", expand=True)
+        # self.dashboard.pack(fill="both", expand=True)
 
-    def show_main_frame(self):
-        """Mostrar el frame principal y ocultar el de configuraciones"""
-        self.settings_frame.pack_forget()
-        self.main_frame.pack(fill="both", expand=True)
-
-    def show_settings_frame(self):
-        """Mostrar el frame de configuraciones y ocultar el principal"""
-        self.main_frame.pack_forget()
-        self.settings_frame.pack(fill="both", expand=True)
+    def push(self, frame_id):
+        next_frame = next((f for f in self.frames if f.id == frame_id), None)
+        
+        if next_frame and next_frame != self.current_frame:
+            self.current_frame.hide()
+            self.current_frame = next_frame
+            self.current_frame.show()
