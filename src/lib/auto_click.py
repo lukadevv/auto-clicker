@@ -13,7 +13,7 @@ class AutoClick:
             start_time = time.time()
             wait_time = interval + random.uniform(0, random_interval)
             while self._start and time.time() - start_time < wait_time:
-                time.sleep(0.05)  # Pequeño delay para verificar constantemente si se detiene
+                time.sleep(0.05)
 
             if self._start:
                 pyautogui.click()
@@ -27,4 +27,4 @@ class AutoClick:
     def stop(self):
         self._start = False
         if self._thread:
-            self._thread.join(timeout=0.1)  # Pequeño timeout para no bloquear
+            self._thread.join(timeout=0.1) 
