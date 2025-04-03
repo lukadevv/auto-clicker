@@ -131,7 +131,7 @@ class AutoClickerFrame(Frame.Frame):
             border_win.geometry(f"{w}x{h}+{x}+{y}")
             border_win.configure(bg="red")
             border_win.attributes("-topmost", True)
-            border_win.update_idletasks()  # Asegura que la geometría se calcule correctamente
+            border_win.update_idletasks()
             self.border_windows.append(border_win)
 
             # TODO: Fix error when F2 instead of Click on them
