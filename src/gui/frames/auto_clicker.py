@@ -16,14 +16,16 @@ class AutoClickerFrame(Frame.Frame):
         self.random_interval = 1.0
         self._start = False
         self.border_visible = True
-
-
+        
         self.autoClick = AutoClick.AutoClick()
-
+        
+        
+        self.main_frame = ctk.CTkFrame(self)
+        self.main_frame.pack(fill="x", padx=10, pady=20)
 
         # Interval
         # -----------------
-        self.interval_frame = ctk.CTkFrame(self)
+        self.interval_frame = ctk.CTkFrame(self.main_frame)
         self.interval_frame.pack(fill="x", padx=10, pady=5)
 
         ctk.CTkLabel(self.interval_frame, text="Interval: ").pack(side="left", padx=5)
@@ -34,13 +36,13 @@ class AutoClickerFrame(Frame.Frame):
             self.interval = value
             self.interval_value.configure(text=f"{f"{self.interval:.1f}"}s")
         
-        self.interval_slider = ctk.CTkSlider(self, from_=0.1, to=30, number_of_steps=155, command=slider_event)
+        self.interval_slider = ctk.CTkSlider((self.main_frame), from_=0.1, to=30, number_of_steps=155, command=slider_event)
         self.interval_slider.pack(fill="x", padx=10, pady=5)
         self.interval_slider.set(self.interval)
 
         # Randomize Range Interval
         # -----------------
-        self.interval_random = ctk.CTkFrame(self)
+        self.interval_random = ctk.CTkFrame(self.main_frame)
         self.interval_random.pack(fill="x", padx=10, pady=5)
 
         ctk.CTkLabel(self.interval_random, text="Randomize Range: ").pack(side="left", padx=5)
@@ -51,14 +53,14 @@ class AutoClickerFrame(Frame.Frame):
             self.random_interval = value
             self.interval_random_value.configure(text=f"{f"{self.random_interval:.1f}"}s")
         
-        self.interval_random_slider = ctk.CTkSlider(self, from_=0, to=30, number_of_steps=155, command=slider_event)
+        self.interval_random_slider = ctk.CTkSlider((self.main_frame), from_=0, to=30, number_of_steps=155, command=slider_event)
         self.interval_random_slider.pack(fill="x", padx=10, pady=5)
         self.interval_random_slider.set(self.random_interval)
         # -----------------
 
         # Border
         # -----------------
-        self.border_frame = ctk.CTkFrame(self)
+        self.border_frame = ctk.CTkFrame(self.main_frame)
         self.border_frame.pack(fill="x", padx=10, pady=5)
 
         def toggle_border():
