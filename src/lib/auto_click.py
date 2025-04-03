@@ -1,28 +1,30 @@
-import pyautogui
+import threading
 import time
 import random
-import threading
+import pyautogui
 
 class AutoClick:
-    def __init__(self, interval: float, random_interval: float):
-        self.interval = interval
-        self.random_interval = random_interval
-        self._running = False
+    def __init__(self):
+        self._start = False
         self._thread = None
 
-    def _click_loop(self):
-        while self._running:
-            wait_time = self.interval + random.uniform(0, self.random_interval)
-            pyautogui.click()
-            time.sleep(wait_time)
+    def _click_loop(self, interval, random_interval):
+        while self._start:
+            start_time = time.time()
+            wait_time = interval + random.uniform(0, random_interval)
+            while self._start and time.time() - start_time < wait_time:
+                time.sleep(0.05)  # Pequeño delay para verificar constantemente si se detiene
 
-    def run(self):
-        if not self._running:
-            self._running = True
-            self._thread = threading.Thread(target=self._click_loop, daemon=True)
+            if self._start:
+                pyautogui.click()
+
+    def run(self, interval: float, random_interval: float):
+        if not self._start:
+            self._start = True
+            self._thread = threading.Thread(target=self._click_loop, args=(interval, random_interval), daemon=True)
             self._thread.start()
 
     def stop(self):
-        self._running = False
+        self._start = False
         if self._thread:
-            self._thread.join()
+            self._thread.join(timeout=0.1)  # Pequeño timeout para no bloquear

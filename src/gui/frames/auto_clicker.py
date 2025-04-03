@@ -2,9 +2,7 @@ import customtkinter as ctk
 import tkinter as tk
 import keyboard
 import src.gui.frames.frame as Frame
-
-import ctypes
-
+import src.lib.auto_click as AutoClick
 
 class AutoClickerFrame(Frame.Frame):
     def __init__(self, parent, controller):
@@ -18,6 +16,9 @@ class AutoClickerFrame(Frame.Frame):
         self.random_interval = 1.0
         self._start = False
         self.border_visible = True
+
+
+        self.autoClick = AutoClick.AutoClick()
 
 
         # Interval
@@ -84,13 +85,21 @@ class AutoClickerFrame(Frame.Frame):
     def startIt(self):
         self.start = True if not self.start else False;
     
+        if (self.start):
+            self.autoClick.run(interval=self.interval, random_interval=self.random_interval)
+        else:
+            self.autoClick.stop()
+
+
         if not (self.border_visible):
             return
         
         if self.start:
+
             if not self.border_windows:
                 self.draw_screen_border()
         else:
+
             for win in self.border_windows:
                 win.destroy()
             self.border_windows = []
