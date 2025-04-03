@@ -10,6 +10,7 @@ class Routes(ctk.CTk):
 
         # Set up
         ctk.set_appearance_mode("dark")
+        self.iconbitmap(os.path.abspath("./src/assets/favicon.ico"))
 
         self.frames = [
             AutoClickerFrame(self, self), # TODO: Remove this
@@ -18,7 +19,6 @@ class Routes(ctk.CTk):
 
         self.current_frame = self.frames[0]
         self.current_frame.show()
-        self.iconbitmap(os.path.abspath("./src/assets/favicon.ico"))
 
     def push(self, frame_id):
         next_frame = next((f for f in self.frames if f.id == frame_id), None)
