@@ -1,7 +1,6 @@
 import customtkinter as ctk
-import os
 
-from src.gui.frames.dashboard import DashboardFrame
+# from src.gui.frames.dashboard import DashboardFrame
 from src.gui.frames.auto_clicker import AutoClickerFrame
 
 class Routes(ctk.CTk):
@@ -10,7 +9,7 @@ class Routes(ctk.CTk):
 
         # Set up
         ctk.set_appearance_mode("dark")
-        self.iconbitmap(os.path.abspath("./src/assets/favicon.ico"))
+        
 
         self.frames = [
             AutoClickerFrame(self, self), # TODO: Remove this
