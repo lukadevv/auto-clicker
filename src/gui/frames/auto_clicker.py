@@ -19,7 +19,6 @@ class AutoClickerFrame(Frame.Frame):
         self._start = False
         self.border_visible = True
 
-        ctk.CTkLabel(self, text="Auto Click", font=("Arial", 18, "bold")).pack(pady=10)
 
         # Interval
         # -----------------
